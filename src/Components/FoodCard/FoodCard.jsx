@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
 
 
 const FoodCard = ({data}) => {
@@ -12,8 +12,10 @@ const FoodCard = ({data}) => {
      const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const location = useLocation();
+    //important for refetch
+    const [,refetch] = useCart();
    // console.log(location.pathname)
-     const handleCard = food => {
+     const handleCard = () => {
         //console.log(food,user.email);
         if(user && user.email){
             //TODO: send cart item to the database
@@ -36,6 +38,7 @@ const FoodCard = ({data}) => {
                         showConfirmButton: false,
                         timer: 1500
                       });
+                      refetch();
                 }
             })
 
@@ -63,7 +66,7 @@ const FoodCard = ({data}) => {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions justify-center">
-                    <button onClick={() => handleCard(data)} className="btn btn-outline border-0 border-b-4 border-yellow-500 bg-slate-100">Order</button>
+                    <button onClick={handleCard} className="btn btn-outline border-0 border-b-4 border-yellow-500 bg-slate-100">Order</button>
                 </div>
             </div>
         </div>
