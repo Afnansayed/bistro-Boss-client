@@ -15,6 +15,7 @@ const LogIn = () => {
     }, [])
 
     const from = location.state?.from?.pathname || "/";
+    console.log(location.state)
     const handleLogin = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -68,7 +69,8 @@ const LogIn = () => {
                             {/* ref={captchaRef} */}
                         </div>
                         <div className="form-control mt-6">
-                            <input disabled={disable} type="submit" value="LogIn" className={`bg-stone-400 py-2 rounded-lg text-white ${disable ? 'opacity-50 cursor-not-allowed' : ''}`} />
+                            <input disabled={false} type="submit" value="LogIn" className={`bg-stone-400 py-2 rounded-lg text-white `} />
+                            {/* ${disable ? 'opacity-50 cursor-not-allowed' : ''} */}
                         </div>
                     </form>
                 </div>
