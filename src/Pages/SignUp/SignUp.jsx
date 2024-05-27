@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 
 const SignUp = () => {
@@ -17,34 +18,46 @@ const SignUp = () => {
       } = useForm()
       const {createUser,updateUser} = useContext(AuthContext);
       const navigate = useNavigate();
+     const axiosPublic= useAxiosPublic();
+     
       const onSubmit = (data) => {
         console.log(data)
-
         //Create User
          createUser(data.email,data.password)
         .then(res => {
             console.log(res.user);
             updateUser(data.name,data.photoURL)
             .then(() => {
-                Swal.fire({
-                    title: "User Updated SuccessFully",
-                    showClass: {
-                      popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                      `
-                    },
-                    hideClass: {
-                      popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                      `
+                //user details save in database
+                const  userInfo =  {
+                    name:data.name,
+                    email:data.email,
+                }
+                axiosPublic.post('/users', userInfo)
+                .then(res =>{
+
+                    if(res.data.insertedId){
+                        Swal.fire({
+                            title: "User Updated SuccessFully",
+                            showClass: {
+                              popup: `
+                                animate__animated
+                                animate__fadeInUp
+                                animate__faster
+                              `
+                            },
+                            hideClass: {
+                              popup: `
+                                animate__animated
+                                animate__fadeOutDown
+                                animate__faster
+                              `
+                            }
+                          });
+                        reset();
+                        navigate('/') ;
                     }
-                  });
-                reset();
-                navigate('/') ;
+                })
             })
             .catch(error => console.error(error))
         })
