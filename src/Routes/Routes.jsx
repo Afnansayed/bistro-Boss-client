@@ -9,6 +9,7 @@ import Scret from "../Components/Scret";
 import PrivateRoue from "./PrivateRoue";
 import DashBoard from "../Layouts/DashBoard/DashBoard";
 import Cart from "../Pages/UserDashboard/Cart/Cart";
+import AllUsers from "../Pages/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -37,11 +38,16 @@ export const router = createBrowserRouter([
       ]
     },{
       path: '/dashboard',
-      element: <DashBoard></DashBoard>,
+      element: <PrivateRoue><DashBoard></DashBoard></PrivateRoue>,
       children:[
         {
           path:'cart',
           element: <Cart></Cart>
+        },
+        //admin routes
+        {
+          path: 'allUsers',
+          element: <AllUsers/>
         }
       ]
     }

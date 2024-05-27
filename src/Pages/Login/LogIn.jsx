@@ -3,6 +3,7 @@ import img from '../../../src/assets/others/authentication1.png'
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const LogIn = () => {
     const {logIn} = useContext(AuthContext);
@@ -73,6 +74,9 @@ const LogIn = () => {
                             {/* ${disable ? 'opacity-50 cursor-not-allowed' : ''} */}
                         </div>
                     </form>
+                    <div className='flex justify-center mb-6'>
+                          <SocialLogin />
+                    </div>
                 </div>
             </div>
         </div>

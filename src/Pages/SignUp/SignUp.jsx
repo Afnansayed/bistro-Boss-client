@@ -6,6 +6,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 
 const SignUp = () => {
@@ -117,6 +118,9 @@ const SignUp = () => {
                             <input  type="submit" value="SignUp" className='bg-stone-400 py-2 rounded-lg text-white' />
                         </div>
                     </form>
+                    <div className='flex justify-center mb-6'>
+                          <SocialLogin />
+                    </div>
                 </div>
             </div>
         </div>
