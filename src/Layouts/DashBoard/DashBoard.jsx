@@ -2,12 +2,13 @@ import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaUsers, FaUtensi
 import { FaCartShopping} from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const DashBoard = () => {
     const [cart,] = useCart();
     //TODO: get isAdmin value  from the data base
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
             <div className="min-h-screen w-64 bg-orange-400 ">
