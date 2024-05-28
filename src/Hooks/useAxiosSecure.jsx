@@ -13,7 +13,7 @@ const useAxiosSecure = () => {
     //request is use for set Headers at one time 
     axiosSecure.interceptors.request.use(function (config){
         const token = localStorage.getItem('access-token');
-        console.log("request stop by interceptors",token);
+        //console.log("request stop by interceptors",token);
         config.headers.authorization = `Bearer ${token}`;
         return config;
     }, function (error) {
@@ -30,7 +30,7 @@ const useAxiosSecure = () => {
         await logOut();
         navigate('/login');
     }
-       console.log("Under the response  ",status);
+      // console.log("Under the response  ",status);
        return Promise.reject(error);
    })      
 
