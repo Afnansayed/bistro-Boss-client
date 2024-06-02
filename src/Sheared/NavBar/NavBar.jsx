@@ -16,6 +16,13 @@ const NavBar = () => {
         <li><Link to="/ourMenu">Our Menu</Link></li>
         <li><Link to="/secret">Secret</Link></li>
         <li><Link to="/order/salad">Order</Link></li>
+        {/* this important */}
+        {
+            user && isAdmin && <li><Link to="/dashboard/adminHome">DashBoard</Link></li>
+        }
+        {
+            user && !isAdmin && <li><Link to="/dashboard/Home">DashBoard</Link></li>
+        }
         <li><Link to="/login">LogIn</Link></li>
         <li><Link to="/signUp">Sign Up</Link></li>
         <li><Link to="/dashboard/allUsers" >
