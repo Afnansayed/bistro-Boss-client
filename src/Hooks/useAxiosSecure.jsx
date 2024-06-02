@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,13 @@ export const axiosSecure = axios.create({
 const useAxiosSecure = () => {
     const {logOut} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [shouldNavigate, setShouldNavigate] = useState(false);
+
+    useEffect(() => {
+        if (shouldNavigate) {
+            navigate('/login');
+        }
+    }, [shouldNavigate, navigate]);
 
     //request is use for set Headers at one time 
     axiosSecure.interceptors.request.use(function (config){
@@ -28,7 +35,7 @@ const useAxiosSecure = () => {
     const status = error.response.status;
     if(status === 401 || status === 403){
         await logOut();
-        navigate('/login');
+        setShouldNavigate(true);
     }
       // console.log("Under the response  ",status);
        return Promise.reject(error);

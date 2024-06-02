@@ -16,7 +16,7 @@ const LogIn = () => {
     }, [])
 
     const from = location.state?.from?.pathname || "/";
-    console.log(location.state)
+    //console.log(location.state)
     const handleLogin = e => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
